@@ -57,6 +57,17 @@ agent any
             }
         }
     }
+       stage('Package'){
+
+         when{
+             branch 'main'
+         }
+   
+         steps{
+           
+             sh 'mvn -f invoice-service/pom.xml install'
+          }     
+
 
    }
 
