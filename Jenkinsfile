@@ -2,6 +2,14 @@
 pipeline{
 
 agent any
+ 
+ parameters{
+   string(
+      name: 'RELEASE_NOTES',
+      defaultvalue: 'Regular release',
+      description: 'Notes for the releases'
+      )
+  } 
 
  tools{
    maven 'maven3'
@@ -58,19 +66,27 @@ agent any
         }
     }
 
+
        stage('Package'){
 
-         when{
-             branch 'main'
+      
+       when{
+         expression{
+            env.GIT_BRANCH=='origin/main' 
+ 
          }
-   
+       }
+     
+ 
          steps{
            
              sh 'mvn -f invoice-service/pom.xml install'
           }     
 
    }
- }
+
+ 
+}
 
    post{
      success{
