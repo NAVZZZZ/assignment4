@@ -1,7 +1,9 @@
 
 pipeline{
 
-agent any
+agent {
+     label 'linux && maven'
+      }
  
  parameters{
    string(
