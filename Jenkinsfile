@@ -43,6 +43,7 @@ agent any
       steps{
  
         sh 'echo "Building $APP_NAME"'
+        sh 'echo "Release notes: $RELEASE_NOTES"'
         sh 'mvn -f invoice-service/pom.xml compile'
 
       }
