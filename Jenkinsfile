@@ -57,6 +57,7 @@ agent any
             }
         }
     }
+
        stage('Package'){
 
          when{
@@ -68,8 +69,8 @@ agent any
              sh 'mvn -f invoice-service/pom.xml install'
           }     
 
-
    }
+ }
 
    post{
      success{
