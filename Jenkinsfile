@@ -61,10 +61,11 @@ agent any
      stage('Package'){
 
        when{
-         branch 'main'
+         expression{
+            env.GIT_BRANCH=='origin/main' 
  
+         }
        }
-
        steps{
    
          sh 'mvn -f invoice-service/pom.xml install'
