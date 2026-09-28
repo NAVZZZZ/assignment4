@@ -6,7 +6,7 @@ agent any
  parameters{
    string(
       name: 'RELEASE_NOTES',
-      defaultvalue: 'Regular release',
+      defaultValue: 'Regular release',
       description: 'Notes for the releases'
       )
   } 
