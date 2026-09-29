@@ -121,6 +121,21 @@ agent {
     }
 }  
 
+     stage('Verify') {
+    when {
+        expression {
+            env.GIT_BRANCH == 'origin/main'
+        }
+    }
+
+    steps {
+        sh '''
+            curl --fail \
+            http://172.31.0.115:9090/invoice-service/
+        '''
+    }
+}  
+
  
 }
 
