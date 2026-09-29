@@ -87,6 +87,13 @@ agent {
 
    }
 
+     stage('Archive') {
+       steps {
+        archiveArtifacts artifacts: 'invoice-service/target/*.war',
+                             fingerprint: true
+    }
+  }
+
  
 }
 
