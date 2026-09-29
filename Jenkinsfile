@@ -94,6 +94,31 @@ agent {
     }
   }
 
+     stage('Deploy') {
+    when {
+        expression {
+            env.GIT_BRANCH == 'origin/main'
+        }
+    }
+
+    steps {
+        withCredentials([
+            usernamePassword(
+                credentialsId: 'jenkins-tomcat-deploy',
+                usernameVariable: 'TOMCAT_USER',
+                passwordVariable: 'TOMCAT_PASSWORD'
+            )
+        ]) {
+            sh '''
+                curl --fail \
+                  --user "$TOMCAT_USER:$TOMCAT_PASSWORD" \
+                  --upload-file invoice-service/target/invoice-service-1.0-SNAPSHOT.war \
+                  "http://172.31.0.115:9090/manager/text/deploy?path=/invoice-service&update=true"
+            '''
+        }
+    }
+}  
+
  
 }
 
