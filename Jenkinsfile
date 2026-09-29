@@ -109,12 +109,13 @@ agent {
                 passwordVariable: 'TOMCAT_PASSWORD'
             )
         ]) {
-            sh '''
-                curl --fail \
-                  --user "$TOMCAT_USER:$TOMCAT_PASSWORD" \
-                  --upload-file invoice-service/target/invoice-service-1.0-SNAPSHOT.war \
-                  "http://172.31.0.115:9090/manager/text/deploy?path=/invoice-service&update=true"
-            '''
+            sh ''' 
+             curl --fail \
+             --user "$TOMCAT_USER:$TOMCAT_PASSWORD" \
+             --request PUT \
+             --upload-file invoice-service/target/invoice-service-1.0-SNAPSHOT.war \
+             "http://172.31.0.115:9090/manager/text/deploy?path=/invoice-service&update=true"
+             '''
         }
     }
 }  
