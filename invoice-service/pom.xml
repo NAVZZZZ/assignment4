@@ -1,150 +1,165 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <groupId>com.meridian.billing</groupId>
-  <artifactId>invoice-service</artifactId>
-  <version>1.0-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
 
-  <name>invoice-service</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+    <groupId>com.meridian.billing</groupId>
+    <artifactId>invoice-service</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
-  <properties>
-  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  <maven.compiler.release>17</maven.compiler.release>
+    <name>invoice-service</name>
+    <url>http://www.example.com</url>
 
-  <junit.version>5.11.0</junit.version>
-  <commons-lang3.version>3.14.0</commons-lang3.version>
-  <jackson-databind.version>2.17.2</jackson-databind.version>
-  <jackson-core.version>2.15.4</jackson-core.version>
-</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
 
-  <dependencyManagement>
+        <junit.version>5.11.0</junit.version>
+        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <jackson-databind.version>2.17.2</jackson-databind.version>
+        <jackson-core.version>2.15.4</jackson-core.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-      <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-	<version>${junit.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!-- Optionally: parameterized tests support -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
-      <scope>test</scope>
-    </dependency>
+        <!-- JUnit -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-lang3</artifactId>
-    <version>${commons-lang3.version}</version>
-    </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>${jackson-databind.version}</version>
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
 
-        <exclusions>
-        <exclusion>
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-        </exclusion>
-    </exclusions>   
-   </dependency>
+            <version>${jackson-core.version}</version>
+        </dependency>
 
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>${jackson-core.version}</version>
-</dependency>
-  </dependencies>
+    </dependencies>
 
-  <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-      <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.4.0</version>
-        </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.3.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-	  <version>3.13.0</version>
-	   <configuration>
-    <release>${maven.compiler.release}</release>
-  </configuration>
-        </plugin>
-        <plugin>
-  <artifactId>maven-surefire-plugin</artifactId>
-  <version>3.3.0</version>
-</plugin>
+    <build>
 
-<plugin>
-  <artifactId>maven-jar-plugin</artifactId>
-  <version>3.4.2</version>
-  <configuration>
-    <archive>
-      <manifest>
-        <mainClass>com.meridian.billing.App</mainClass>
-      </manifest>
-    </archive>
-  </configuration>
-</plugin>
+        <pluginManagement>
+            <plugins>
 
-<plugin>
-  <artifactId>maven-install-plugin</artifactId>
-  <version>3.1.2</version>
-</plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.2</version>
-        </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.12.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.6.1</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-    <plugins>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-   </plugin>
-     <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-shade-plugin</artifactId>
-    <version>3.6.0</version>
-    <executions>
-      <execution>
-        <phase>package</phase>
-        <goals>
-          <goal>shade</goal>
-        </goals>
-      </execution>
-    </executions>
-  </plugin>
-    </plugins>
-  </build>
+                <!-- Clean -->
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.4.0</version>
+                </plugin>
+
+                <!-- Resources -->
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+
+                <!-- Compiler -->
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <release>${maven.compiler.release}</release>
+                    </configuration>
+                </plugin>
+
+                <!-- Tests -->
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+
+                <!-- WAR -->
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.4.0</version>
+                </plugin>
+
+                <!-- Install -->
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+
+                <!-- Deploy -->
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+
+                <!-- Site -->
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.12.1</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.6.1</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+
+            <!-- WAR packaging -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
 </project>
+
+
