@@ -139,25 +139,36 @@ agent {
  
 }
 
-
-   
 post {
     failure {
-        emailext(
+        mail(
             subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: "Build failed: ${env.BUILD_URL}",
+            body: """
+Job Name: ${env.JOB_NAME}
+Build Number: ${env.BUILD_NUMBER}
+Build URL: ${env.BUILD_URL}
+
+The Jenkins build has failed.
+""",
             to: "navzzzonline@gmail.com"
         )
     }
 
     fixed {
-        emailext(
+        mail(
             subject: "FIXED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: "Build is fixed: ${env.BUILD_URL}",
+            body: """
+Job Name: ${env.JOB_NAME}
+Build Number: ${env.BUILD_NUMBER}
+Build URL: ${env.BUILD_URL}
+
+The Jenkins build is fixed and successful again.
+""",
             to: "navzzzonline@gmail.com"
         )
     }
 }
+
   
  } 
 
