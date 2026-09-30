@@ -105,7 +105,7 @@ agent {
     steps {
         withCredentials([
             usernamePassword(
-                credentialsId: 'jenkins-tomcat-deploy',
+                credentialsId: 'jenkins-tomcatdeploy',
                 usernameVariable: 'TOMCAT_USER',
                 passwordVariable: 'TOMCAT_PASSWORD'
             )
