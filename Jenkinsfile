@@ -139,17 +139,6 @@ agent {
  
 }
 
-   post{
-     success{
-
-          sh 'echo "The pipeline was successful"'
-             }
-       
-     failure{
-
-          sh 'echo "The pipeline failed"'
-        }
-    } 
 
    
 post {
