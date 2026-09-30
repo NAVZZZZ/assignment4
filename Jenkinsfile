@@ -150,6 +150,25 @@ agent {
           sh 'echo "The pipeline failed"'
         }
     } 
+
+   
+post {
+    failure {
+        emailext(
+            subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "Build failed: ${env.BUILD_URL}",
+            to: "navzzzonline@gmail.com"
+        )
+    }
+
+    fixed {
+        emailext(
+            subject: "FIXED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "Build is fixed: ${env.BUILD_URL}",
+            to: "navzzzonline@gmail.com"
+        )
+    }
+}
   
  } 
 
